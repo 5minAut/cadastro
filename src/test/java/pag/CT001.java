@@ -1,5 +1,7 @@
 package pag;
 
+import static org.junit.Assert.fail;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
@@ -17,6 +19,8 @@ public class CT001 extends Base{
 			Thread.sleep(2000);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			btnLimpar();
+			fail();
 		}
 	}
 
@@ -33,6 +37,8 @@ public class CT001 extends Base{
 		    driver.findElement(By.id("userphone")).sendKeys(telefone);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			btnLimpar();
+			fail();
 		}
 	}
 
@@ -43,6 +49,8 @@ public class CT001 extends Base{
 			Thread.sleep(2000);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			btnLimpar();
+			fail();
 		}
 	}
 
@@ -57,23 +65,29 @@ public class CT001 extends Base{
 					driver.findElement(By.id("submit")).click();
 					Thread.sleep(2000);
 					Assert.assertEquals(driver.findElement(By.xpath("//td[4]")).getText(),valor);
+					x++;
 					break;
 				case 2:
 					driver.findElement(By.id("username")).sendKeys(valor);
 					driver.findElement(By.id("submit")).click();
 					Thread.sleep(2000);
 					Assert.assertEquals(driver.findElement(By.xpath("//td[2]")).getText(),valor);
+					x++;
 					break;
 				case 3:
 					driver.findElement(By.id("useremail")).sendKeys(valor);
 					driver.findElement(By.id("submit")).click();
 					Thread.sleep(2000);
 					Assert.assertEquals(driver.findElement(By.xpath("//td[3]")).getText(),valor);
-					break;	
-					
-			}	
+					x++;
+					break;
+			}
+			if(x<5)
+				btnLimpar();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			btnLimpar();
+			fail();
 		}
 	}
 

@@ -7,5 +7,5 @@ Funcionalidade: Realizar busca no sistema pelo filtro do campo nome
     Então realizar busca pelos valores: <id> <nome>;
 
     Exemplos: 
-      | id | nome             |
+      | id | nome              |
       |  2 | "Jadson Martins" |
