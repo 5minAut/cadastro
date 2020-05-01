@@ -4,6 +4,8 @@ import static org.junit.Assert.fail;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import config.Base;
 import cucumber.api.java.pt.Dado;
@@ -16,7 +18,7 @@ public class CT001 extends Base{
 	public void clickBnt() throws Throwable {
 		try {
 			driver.findElement(By.linkText("Add Usuários")).click();
-			Thread.sleep(2000);
+			Thread.sleep(2000);			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			btnLimpar();
@@ -64,21 +66,55 @@ public class CT001 extends Base{
 					driver.findElement(By.id("userphone")).sendKeys(valor);
 					driver.findElement(By.id("submit")).click();
 					Thread.sleep(2000);
-					Assert.assertEquals(driver.findElement(By.xpath("//td[4]")).getText(),valor);
+					try {
+						Assert.assertEquals(driver.findElement(By.xpath("//td[4]")).getText(),valor);
+						img = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+						evidencias(img,sucess,"CT0"+x+"/imagem"+x+".png");
+					} catch (AssertionError e) {
+						img = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+						evidencias(img,fail,"CT0"+x+"/imagem"+x+".png");
+						System.out.println(e.getMessage());
+						btnLimpar();
+						fail();
+					}
+					
 					x++;
 					break;
+					
 				case 2:
 					driver.findElement(By.id("username")).sendKeys(valor);
 					driver.findElement(By.id("submit")).click();
 					Thread.sleep(2000);
-					Assert.assertEquals(driver.findElement(By.xpath("//td[2]")).getText(),valor);
+					try {
+						Assert.assertEquals(driver.findElement(By.xpath("//td[2]")).getText(),valor);
+						img = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+						evidencias(img,sucess,"CT0"+x+"/imagem"+x+".png");
+					} catch (Exception e) {
+						img = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+						evidencias(img,fail,"CT0"+x+"/imagem"+x+".png");
+						System.out.println(e.getMessage());
+						btnLimpar();
+						fail();
+					}					
 					x++;
 					break;
+					
 				case 3:
 					driver.findElement(By.id("useremail")).sendKeys(valor);
 					driver.findElement(By.id("submit")).click();
 					Thread.sleep(2000);
-					Assert.assertEquals(driver.findElement(By.xpath("//td[3]")).getText(),valor);
+					try {
+						Assert.assertEquals(driver.findElement(By.xpath("//td[3]")).getText(),valor);
+						img = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+						evidencias(img,sucess,"CT0"+x+"/imagem"+x+".png");
+					} catch (Exception e) {
+						img = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+						evidencias(img,fail,"CT0"+x+"/imagem"+x+".png");
+						System.out.println(e.getMessage());
+						btnLimpar();
+						fail();
+					}
+					
 					x++;
 					break;
 			}

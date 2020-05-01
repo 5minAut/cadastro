@@ -1,7 +1,11 @@
 package pag;
 
+import static org.junit.Assert.fail;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import config.Base;
 import cucumber.api.java.pt.Dado;
@@ -23,9 +27,21 @@ public class CT000 extends Base {
 	@Então("^verificar se o sistema está disponível pela \"([^\"]*)\"$")
 	public void verificarSistemaDisponivel(String titulo) throws Throwable {
 		try {
-			Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/h1/a")).getText(),titulo);
+			try {
+				Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/h1/a")).getText(),titulo);
+				img = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+				evidencias(img,sucess,"CT00/aberturaBrowser.png");
+			} catch (AssertionError e) {
+				img = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+				evidencias(img,fail,"CT00/aberturaBrowser.png");
+				System.out.println(e.getMessage());
+				fail();
+			}			
 		} catch (Exception e) {
+			img = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			evidencias(img,fail,"CT00/aberturaBrowser.png");
 			System.out.println(e.getMessage());
+			fail();
 		}
 	}
 }
