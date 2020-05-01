@@ -23,9 +23,9 @@ public class Base {
 			
 			ChromeOptions options = new ChromeOptions();			
 			options.addArguments("--headless");			
-			//driver = new ChromeDriver(options);
+			driver = new ChromeDriver(options);
 			
-			driver = new ChromeDriver();
+			//driver = new ChromeDriver();
 			
 			driver.manage().deleteAllCookies();
 			driver.manage().window().maximize();
